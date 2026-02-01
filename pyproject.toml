@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tmdbsimple"
+dynamic = ["version"]
+description = "A Python wrapper for The Movie Database API v3"
+readme = "README.md"
+license = {text = "GPL-3.0-or-later"}
+authors = [
+    { name = "Celia Oakley", email = "celia.oakley@alumni.stanford.edu" },
+]
+keywords = [
+    "api",
+    "database",
+    "movie",
+    "movie database",
+    "moviedb",
+    "the movie database",
+    "themoviedb",
+    "tmdb",
+    "wrapper",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "requests",
+]
+
+[project.urls]
+Homepage = "https://github.com/celiao/tmdbsimple"
+
+[tool.hatch.version]
+path = "tmdbsimple/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/tmdbsimple",
+]
