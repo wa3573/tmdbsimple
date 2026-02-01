@@ -89,6 +89,13 @@ import requests
 tmdb.REQUESTS_SESSION = requests.Session()
 ```
 
+_Optionally_, configure the library to use bearer authentication. This may be useful if you
+encounter authorization issues with the default method of passing the API key via URL parameters.
+
+```python
+tmdb.USE_BEARER_AUTH = True
+```
+
 To communicate with The Movie Database API, create an instance of one of the
 object types, call one of the methods on the instance, and access the instance
 attributes.  Use keys to access the values of attributes that are dictionaries.

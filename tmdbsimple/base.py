@@ -27,11 +27,17 @@ class TMDB(object):
     URLS = {}
 
     def __init__(self):
-        from . import API_VERSION, REQUESTS_SESSION, REQUESTS_TIMEOUT
+        from . import API_VERSION, REQUESTS_SESSION, REQUESTS_TIMEOUT, USE_BEARER_AUTH, API_KEY
         self.base_uri = 'https://api.themoviedb.org'
         self.base_uri += '/{version}'.format(version=API_VERSION)
         self.session = REQUESTS_SESSION
         self.timeout = REQUESTS_TIMEOUT
+
+        if USE_BEARER_AUTH:
+            if not API_KEY:
+                raise APIKeyError
+            
+            self.headers['Authorization'] = f'Bearer {API_KEY}'
 
     def _get_path(self, key):
         return self.BASE_PATH + self.URLS[key]
@@ -63,11 +69,15 @@ class TMDB(object):
         return '{base_uri}/{path}'.format(base_uri=self.base_uri, path=path)
 
     def _get_params(self, params):
-        from . import API_KEY
+        from . import API_KEY, USE_BEARER_AUTH
         if not API_KEY:
             raise APIKeyError
 
-        api_dict = {'api_key': API_KEY}
+        if USE_BEARER_AUTH:
+            api_dict = {}
+        else:
+            api_dict = {'api_key': API_KEY}
+
         if params:
             params.update(api_dict)
             for key, value in params.items():
